@@ -50,8 +50,8 @@ public class ReviewResourceIT {
 	public void insertShouldReturnUnauthorizedWhenNotValidToken() throws Exception {
 
 		ReviewDTO reviewDTO = new ReviewDTO();
-		reviewDTO.setText("Gostei do filme!");
-		reviewDTO.setMovieId(1L);
+//		reviewDTO.setText("Gostei do filme!");
+//		reviewDTO.setMovieId(1L);
 
 		String jsonBody = objectMapper.writeValueAsString(reviewDTO);
 		
@@ -70,8 +70,8 @@ public class ReviewResourceIT {
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, visitorUsername, visitorPassword);
 		
 		ReviewDTO reviewDTO = new ReviewDTO();
-		reviewDTO.setText("Gostei do filme!");
-		reviewDTO.setMovieId(1L);
+//		reviewDTO.setText("Gostei do filme!");
+//		reviewDTO.setMovieId(1L);
 
 		String jsonBody = objectMapper.writeValueAsString(reviewDTO);
 		
@@ -94,8 +94,8 @@ public class ReviewResourceIT {
 		long movieId = 1L;
 		
 		ReviewDTO reviewDTO = new ReviewDTO();
-		reviewDTO.setText(reviewText);
-		reviewDTO.setMovieId(movieId);
+//		reviewDTO.setText(reviewText);
+//		reviewDTO.setMovieId(movieId);
 
 		String jsonBody = objectMapper.writeValueAsString(reviewDTO);
 		
@@ -124,8 +124,8 @@ public class ReviewResourceIT {
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, memberUsername, memberPassword);
 		
 		ReviewDTO reviewDTO = new ReviewDTO();
-		reviewDTO.setText("        ");
-		reviewDTO.setMovieId(1L);
+//		reviewDTO.setText("        ");
+//		reviewDTO.setMovieId(1L);
 
 		String jsonBody = objectMapper.writeValueAsString(reviewDTO);
 

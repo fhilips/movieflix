@@ -18,8 +18,8 @@ public class GenreResources {
 	@Autowired
 	private GenreService service;
 	
-	@GetMapping  
-    public ResponseEntity<List<GenreDTO>>getGenre() throws Exception{		
+	@GetMapping()  
+    public ResponseEntity<List<GenreDTO>>getGenre() throws Exception {		
 		
 		List<GenreDTO> genreList = service.findAll();
        
