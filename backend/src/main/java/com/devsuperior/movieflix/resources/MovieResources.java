@@ -1,10 +1,10 @@
 package com.devsuperior.movieflix.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.movieflix.dto.MovieDTO;
+import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.services.MovieService;
 
 @RestController
@@ -25,9 +26,9 @@ public class MovieResources {
 	@GetMapping(value = "{id}") 
     public ResponseEntity<MovieDTO> findById(@PathVariable Long id) throws Exception{		
 		
-		MovieDTO genreList = service.findById(id);
+		MovieDTO movieDto = service.findById(id);
        
-        return ResponseEntity.ok().body(genreList);
+        return ResponseEntity.ok().body(movieDto);
     }
 	
 	@GetMapping
@@ -40,4 +41,12 @@ public class MovieResources {
 		
 		return ResponseEntity.ok().body(list);
 	}
+	
+	@GetMapping(value = "{id}/reviews") 
+    public ResponseEntity<List<ReviewDTO>> findMovieReviewsById(@PathVariable Long id) throws Exception{		
+		
+		List<ReviewDTO> movieReviews = service.findMovieReviewsById(id);
+       
+        return ResponseEntity.ok().body(movieReviews);
+    }
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
+import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.entities.User;
 
 public class ReviewDTO implements Serializable {
@@ -25,6 +26,15 @@ public class ReviewDTO implements Serializable {
 		this.movieId = movieId;
 		this.user = new UserDTO(user.getId(), user.getName(), user.getEmail());
 	}
+	public ReviewDTO(Review entity){
+		this.id = entity.getId();
+		this.text = entity.getText();
+		this.movieId = entity.getMovie().getId();
+		this.user = new UserDTO(
+							entity.getUser().getId(),
+							entity.getUser().getName(),
+							entity.getUser().getEmail());
+    }
 
 	public Long getId() {
 		return id;
