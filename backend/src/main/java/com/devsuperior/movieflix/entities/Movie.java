@@ -40,7 +40,7 @@ public class Movie implements Serializable {
 	public Movie() {
 		
 	}
-
+	
 	public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Genre genre) {
 		this.id = id;
 		this.title = title;
@@ -50,53 +50,67 @@ public class Movie implements Serializable {
 		this.synopsis = synopsis;
 		this.genre = genre;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getSubTitle() {
 		return subTitle;
 	}
+
 	public void setSubTitle(String subTitle) {
 		this.subTitle = subTitle;
 	}
+
 	public String getImgUrl() {
 		return imgUrl;
 	}
+
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
+
 	public String getSynopsis() {
 		return synopsis;
 	}
+
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
 	}
+
 	public Integer getYear() {
 		return year;
 	}
+
 	public void setYear(Integer year) {
 		this.year = year;
 	}
+
 	public Genre getGenre() {
 		return genre;
 	}
+
 	public void setGenre(Genre genre) {
 		this.genre = genre;
-	}	
+	}
+
 	public List<Review> getReviews() {
 		return reviews;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -104,6 +118,7 @@ public class Movie implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -120,7 +135,6 @@ public class Movie implements Serializable {
 			return false;
 		return true;
 	}
-
-		
+	
 	
 }

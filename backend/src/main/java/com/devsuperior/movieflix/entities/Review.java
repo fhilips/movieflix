@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_review")
@@ -20,6 +21,7 @@ public class Review implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String text;
 	
 	@ManyToOne
@@ -30,13 +32,18 @@ public class Review implements Serializable {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	public Review(Long id, String text, Movie movie, User user) {
-		super();
-		this.id = id;
+	public Review(String text, Movie movie, User user) {				
 		this.text = text;
 		this.movie = movie;
 		this.user = user;
 	}
+	
+	
+	public Review(String text, Movie movie) {		
+		this.text = text;
+		this.movie = movie;	
+	}
+	
 	
 	public Review() {
 		

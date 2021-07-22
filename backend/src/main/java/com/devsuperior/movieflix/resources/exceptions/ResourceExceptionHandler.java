@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -28,7 +30,7 @@ public class ResourceExceptionHandler {
 	}
 	
 	@ExceptionHandler(ForbiddenException.class)
-	public ResponseEntity<StandardError> entityNotFound(ForbiddenException e, HttpServletRequest request){
+	public ResponseEntity<StandardError> forbidden(ForbiddenException e, HttpServletRequest request){
 		HttpStatus status = HttpStatus.FORBIDDEN;
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
@@ -39,6 +41,24 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ValidationError> validation (MethodArgumentNotValidException e, HttpServletRequest request){
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		ValidationError err = new ValidationError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Validation exception");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI()); 
+		System.out.println("Validation exception");
+		
+		for (FieldError f : e.getBindingResult().getFieldErrors()) {
+			System.out.println("Validation exception");
+			err.addError(f.getField(), f.getDefaultMessage());
+		}
+		
+		return ResponseEntity.status(status).body(err);
+	}
 
 	
  }

@@ -3,6 +3,7 @@ package com.devsuperior.movieflix.resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,15 +32,11 @@ public class MovieResources {
 	
 	@GetMapping
 	public ResponseEntity<Page<MovieDTO>> findAll(
-			@RequestParam(value = "genreId", defaultValue = "0") Long genreId,			
-			@RequestParam(value = "page", defaultValue = "0") Integer page ,
-			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "ASC") String direction
-			) {
-		
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy );
-		Page<MovieDTO> list = service.findAllPaged(genreId, pageRequest);
+			@RequestParam(value = "genreId", defaultValue = "0") Long genreId,
+			Pageable pageable
+			) { 
+	
+		Page<MovieDTO> list = service.findAllPaged(genreId, pageable);
 		
 		return ResponseEntity.ok().body(list);
 	}
