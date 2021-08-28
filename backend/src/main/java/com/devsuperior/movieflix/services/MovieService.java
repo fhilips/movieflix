@@ -55,8 +55,7 @@ public class MovieService {
 
 	public List<ReviewDTO> findMovieReviewsById(Long id) {
 		
-		List<Review> findMovieReviewsById = reviewRepository.findMovieReviewsById(id);
-		
+		List<Review> findMovieReviewsById = reviewRepository.findMovieReviewsById(id);		
 		return findMovieReviewsById.stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
 	}
 	
