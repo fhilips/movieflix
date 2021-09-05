@@ -1,9 +1,11 @@
 import { ReactComponent as MainImage } from 'assets/images/main-image.svg';
+import { AuthContext } from 'AuthContext';
 import MainButton from 'components/MainButton';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import { isAuthenticated, requestBackendLogin, saveAuthData } from 'utils/request';
+import { useHistory, useLocation } from 'react-router-dom';
+import { getTokenData, isAuthenticated, requestBackendLogin, saveAuthData } from 'utils/request';
+
 import './styles.scss';
 
 type FormData = {
@@ -11,8 +13,16 @@ type FormData = {
   password: string,
 }
 
+type LocationState = {
+  from: string
+}
+
 const LoginPage = () => {
-  const [hasError, setHasError] = useState(false);
+  const location = useLocation<LocationState>();
+  const { from } = location.state || { from: { pathname: '/'} };
+
+  const { setAuthContextData } = useContext(AuthContext);
+  const [ hasError, setHasError] = useState(false);
   const { register, handleSubmit } = useForm<FormData>();
   const history = useHistory()
 
@@ -22,7 +32,11 @@ const LoginPage = () => {
         saveAuthData(response.data);    
         setHasError(false);    
         console.log("Sucesso! ", response);  
-        history.push('/movies');
+        setAuthContextData({
+          authenticated: true,
+          tokenData: getTokenData()
+        })
+        history.replace(from);
       })
       .catch(error => {
         setHasError(true);
