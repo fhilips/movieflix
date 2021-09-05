@@ -1,6 +1,8 @@
 import { ReactComponent as MainImage } from 'assets/images/main-image.svg';
 import MainButton from 'components/MainButton';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { requestBackendLogin, saveAuthData } from 'utils/request';
 import './styles.scss';
 
@@ -10,18 +12,22 @@ type FormData = {
 }
 
 const LoginPage = () => {
+  const [hasError, setHasError] = useState(false);
   const { register, handleSubmit } = useForm<FormData>();
+  const history = useHistory()
 
   const onSubmit = (formData: FormData) => {
     requestBackendLogin(formData)
       .then(response => {
-        saveAuthData(response.data);
-        console.log("Sucesso! ", response);        
+        saveAuthData(response.data);    
+        setHasError(false);    
+        console.log("Sucesso! ", response);  
+        history.push('/movies');
       })
       .catch(error => {
+        setHasError(true);
         console.log("Error! ", error);
-      })
-    
+      })    
   }
 
   return (
