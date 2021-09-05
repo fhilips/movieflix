@@ -1,7 +1,7 @@
 import { ReactComponent as MainImage } from 'assets/images/main-image.svg';
 import MainButton from 'components/MainButton';
 import { useForm } from 'react-hook-form';
-import { requestBackendLogin } from 'utils/request';
+import { requestBackendLogin, saveAuthData } from 'utils/request';
 import './styles.scss';
 
 type FormData = {
@@ -14,8 +14,13 @@ const LoginPage = () => {
 
   const onSubmit = (formData: FormData) => {
     requestBackendLogin(formData)
-      .then(response => {console.log("Sucesso! ", response)})
-      .catch(error => {console.log("Error! ", error)})
+      .then(response => {
+        saveAuthData(response.data);
+        console.log("Sucesso! ", response);        
+      })
+      .catch(error => {
+        console.log("Error! ", error);
+      })
     
   }
 
