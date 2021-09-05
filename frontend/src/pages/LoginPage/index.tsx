@@ -1,6 +1,7 @@
 import { ReactComponent as MainImage } from 'assets/images/main-image.svg';
 import MainButton from 'components/MainButton';
 import { useForm } from 'react-hook-form';
+import { requestBackendLogin } from 'utils/request';
 import './styles.scss';
 
 type FormData = {
@@ -12,7 +13,10 @@ const LoginPage = () => {
   const { register, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (formData: FormData) => {
-    console.log(formData)
+    requestBackendLogin(formData)
+      .then(response => {console.log("Sucesso! ", response)})
+      .catch(error => {console.log("Error! ", error)})
+    
   }
 
   return (
