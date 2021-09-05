@@ -3,7 +3,7 @@ import MainButton from 'components/MainButton';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { requestBackendLogin, saveAuthData } from 'utils/request';
+import { isAuthenticated, requestBackendLogin, saveAuthData } from 'utils/request';
 import './styles.scss';
 
 type FormData = {
@@ -43,6 +43,7 @@ const LoginPage = () => {
 
       <div className="login-card-container">
         <h1 className="login-title">LOGIN</h1>
+        {isAuthenticated() ? 'yes' : 'no'}
         <form className="login-input-container" onSubmit={handleSubmit(onSubmit)}>
           
             <input

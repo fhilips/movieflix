@@ -1,12 +1,20 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import qs from 'qs';
-import history from './history';
+import jwtDecode from 'jwt-decode';
 
 export const BASE_URL =
   process.env.REACT_APP_CLIENT_ID ?? 'http://localhost:8080';
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'dotmovieflix';
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'dotmovieflix123';
 const tokenKey = 'authData';
+
+type Role = 'ROLE_MEMBER' | 'ROLE_VISITOR';
+
+type TokenData = {
+  exp: number;
+  user_name: string;
+  authorities: Role[];
+};
 
 type LoginResponse = {
   access_token: string;
@@ -15,13 +23,14 @@ type LoginResponse = {
   scope: string;
   userId: number;
 };
-const basicHeader = () =>
-  'Basic ' + window.btoa(CLIENT_ID + ':' + CLIENT_SECRET);
 
 type LoginData = {
   username: string;
   password: string;
 };
+
+const basicHeader = () =>
+  'Basic ' + window.btoa(CLIENT_ID + ':' + CLIENT_SECRET);
 
 export const requestBackendLogin = (loginData: LoginData) => {
   const headers = {
@@ -62,23 +71,16 @@ export const getAuthData = () => {
   return JSON.parse(str) as LoginResponse;
 };
 
-axios.interceptors.request.use(
-  function (config) {
-    return config;
-  },
-  function (error) {
-    return Promise.reject(error);
+export const getTokenData = () : TokenData | undefined => {
+  try {
+    return jwtDecode(getAuthData().access_token) as TokenData;
+  } catch (error) {
+    return undefined;
   }
-);
+};
 
-axios.interceptors.response.use(
-  function (response) {
-    return response;
-  },
-  function (error) {
-    if(error.response.status === 401 || error.response.status === 403) {
-      history.push('/');
-    }
-    return Promise.reject(error);
-  }
-);
+export const isAuthenticated = (): boolean => {
+  const tokenData = getTokenData();
+
+  return (tokenData && tokenData.exp * 1000 > Date.now()) ? true : false; 
+}

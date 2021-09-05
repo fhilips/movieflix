@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { requestBackend } from 'utils/request';
+import { getTokenData, requestBackend } from 'utils/request';
 import './styles.scss';
 type Movie = {
   id: number;
@@ -33,7 +33,7 @@ const MovieList = () => {
   return (
     <main className="movie-list-container">
       <h1 className="movie-list-title">Tela listagem de filmes</h1>
-
+      
       {moviesList?.content.map((movie) => {
         return (
           <Link to={`/movies/${movie.id}`} key={movie.id} className="movie-title">

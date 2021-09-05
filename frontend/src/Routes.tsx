@@ -1,4 +1,5 @@
 import Navbar from 'components/Navbar';
+import PrivateRoute from 'components/PrivateRoute';
 import LoginPage from 'pages/LoginPage';
 import MovieDetails from 'pages/MovieDetails';
 import MovieList from 'pages/MovieList';
@@ -13,12 +14,12 @@ const Routes = () => (
       <Route exact path="/" >
         <LoginPage />
       </Route>      
-      <Route exact path="/movies" >
+      <PrivateRoute path="/movies" >
         <MovieList />
-      </Route> 
-      <Route path="/movies/movieId" >
+      </PrivateRoute> 
+      <PrivateRoute path="/movies/:movieId" >
         <MovieDetails />
-      </Route>   
+      </PrivateRoute>   
     </Switch>
   </Router>
 );
