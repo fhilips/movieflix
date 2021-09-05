@@ -1,7 +1,9 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getTokenData, requestBackend } from 'utils/request';
+import { requestBackend } from 'utils/request';
+
+
 import './styles.scss';
 type Movie = {
   id: number;
