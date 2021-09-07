@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import qs from 'qs';
 
+import qs from 'qs';
+import history from './history';
 import { getAuthData } from './storage';
 
 export const BASE_URL =
@@ -8,14 +9,20 @@ export const BASE_URL =
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'dotmovieflix';
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'dotmovieflix123';
 
-
 type LoginData = {
   username: string;
   password: string;
 };
 
+
+type ReviewData = {
+  text: string,    
+  movieId: string;
+}
+
 const basicHeader = () =>
   'Basic ' + window.btoa(CLIENT_ID + ':' + CLIENT_SECRET);
+
 
 export const requestBackendLogin = (loginData: LoginData) => {
   const headers = {
@@ -47,3 +54,39 @@ export const requestBackend = (config: AxiosRequestConfig) => {
   return axios({ ...config, baseURL: BASE_URL, headers });
 };
 
+export const requestBackendReviews = (reviewsData: ReviewData) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getAuthData().access_token,
+  };
+
+  return axios({
+    method: 'POST',
+    baseURL: BASE_URL,
+    url: '/reviews',
+    data: reviewsData,
+    headers,
+  });
+
+};
+
+axios.interceptors.request.use(
+  function (config) {
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+
+axios.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    if (error.response.status === 401 ) {
+      history.push('/');
+    }
+    return Promise.reject(error);
+  }
+);

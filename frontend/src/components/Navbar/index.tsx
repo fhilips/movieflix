@@ -34,14 +34,15 @@ const Navbar = () => {
 
   return( 
     <div className="navbar-container bg-primary">
-        <h1 className="navbar-title">MovieFlix</h1>
+      <Link to="/movies"><h1 className="navbar-title">MovieFlix</h1></Link>
+        
         <div className="nav-login-logout">
           {authContextData.authenticated ? (
             <>
-              <a href="#logout" onClick={handleLogoutClick} >LOGOUT</a>
+              <a className="btn-login-logout" href="/" onClick={handleLogoutClick} >LOGOUT</a>
             </>
           )  : (
-            <Link to="/">LOGIN</Link>
+            <Link className="btn-login-logout" to="/">LOGIN</Link>
           )
           }
         </div>

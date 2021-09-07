@@ -7,7 +7,7 @@ type Props = {
 const MainButton = ({ text }: Props) => {
   return (
     <div className="button-container">
-      <button className="bg-primary">
+      <button className="bg-primary" type="submit">
         <h6>{text}</h6>
       </button>
     </div>
