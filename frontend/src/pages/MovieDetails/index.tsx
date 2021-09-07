@@ -8,6 +8,9 @@ import { hasAnyRoles } from 'utils/auth';
 import ReviewCard from './ReviewCard';
 import { Review } from 'types/Reviews';
 import { useForm } from 'react-hook-form';
+import DetailsCard from './CardDetails';
+import { Movie } from 'types/Movies';
+import { AxiosRequestConfig } from 'axios';
 
 type UrlParams = {
   movieId: string;  
@@ -24,6 +27,8 @@ const MovieDetails = () => {
   const { movieId } = useParams<UrlParams>();
 
   const [movieReviews, setMovieReviews] = useState<MovieReviewList>();
+
+  const [movie, setMovie] = useState<Movie>();
 
   const [newReview, setNewReview] = useState(false);
 
@@ -44,6 +49,17 @@ const MovieDetails = () => {
     });
   }, [movieId, newReview]);
 
+  useEffect(() => {
+    const params: AxiosRequestConfig = {
+      url: `/movies/${movieId}`,
+      withCredentials: true,     
+    };
+    requestBackend(params).then((response) => {
+      setMovie(response.data);
+      console.log(response.data);
+    });
+  }, [movieId]);
+
   const onSubmit = (formData: FormData) => {
     formData.movieId = movieId;
     console.log(formData)
@@ -60,10 +76,8 @@ const MovieDetails = () => {
 
   return (
     <main className="movie-details-container">
-      <div className="movie-details-title-container">
-        <h1 className="movie-details-title">
-          Tela detalhes do filme Id: {movieId}
-        </h1>
+      <div className="movie-details-card">
+        {movie && <DetailsCard movie={movie}/>}
       </div>
 
       {hasAnyRoles(['ROLE_MEMBER']) && (

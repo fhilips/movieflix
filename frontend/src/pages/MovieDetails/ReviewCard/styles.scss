@@ -1,18 +1,18 @@
 .review-card-container {
   width: 100%;
-
+  
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 
   background-color: #6C6C6C;
-  border-radius: 10px; 
+  border-radius: 4px; 
 
   .username-container {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 30px 0 15px 20px;
+    margin: 30px 0 15px 3%;
     .username-review {
       color: #FFF;
       font-size: 1rem;
@@ -20,7 +20,7 @@
   }
 
   .review-text-container {
-    width: 96%;
+    width: 94%;
     border: 1px solid #fff;
     border-radius: 4px;
     margin: 0 auto;

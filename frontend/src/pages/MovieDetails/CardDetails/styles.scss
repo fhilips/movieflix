@@ -1,0 +1,88 @@
+.details-card-container {
+  min-height: 322px;  
+  border-radius: 4px;
+  margin: 20px 10px;
+  max-width: 1120px;
+  display: flex;
+  flex-direction: column;
+
+  .details-img-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+     
+    .details-img {    
+      width: 100%;     
+    }
+  }
+  
+  .details-content {
+    display: flex;
+    flex-direction: column;
+    .details-card-title {
+      margin: 12px 0 2px 20px;
+      font-weight: bold;
+      font-size: 20px;    
+      letter-spacing: -0.015em;
+      color: #FFFFFF;
+    }
+  
+    .details-card-year {
+      margin-left: 20px;
+      font-weight: bold;
+      font-size: 16px;   
+      letter-spacing: -0.015em;
+      color: #FFC700;
+    }
+  
+    .details-card-subtitle {
+      margin: 0 0 16px 20px;
+      font-size: 14px;
+      letter-spacing: -0.015em;
+      color: #FFFFFF;
+    }
+
+    .details-card-synopsis {
+      font-size: 16px;      
+      text-align: justify;
+      letter-spacing: -0.015em;
+      padding: 13px;
+      color: #9E9E9E;
+      margin: 0 20px 20px 20px;
+
+      border: 1px solid #E1E1E1;
+      border-radius: 10px;
+    }
+
+  }
+   
+}
+
+@media (min-width: 768px) {
+  .details-card-container {
+    margin: 40px;
+    padding: 0 20px 20px 20px;
+  }
+  .details-img {    
+    width: 608px !important;   
+    height: 382px !important;  
+    margin-top: 20px;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .details-card-container {    
+    flex-direction: row
+  }
+  .details-content {
+    margin-top: 40px;
+  }
+  .details-img {
+    width: 500px !important;   
+    height: 314px !important;  
+  }
+
+}

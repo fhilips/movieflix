@@ -12,8 +12,7 @@ const ReviewCard = ({ movieReview }: Props) => {
 
   return (  
 
-      <div className="review-card-container">
-        
+      <div className="review-card-container">        
         <div className="username-container">
           <Star />
           <h4 className="username-review">{movieReview.user?.name}</h4>

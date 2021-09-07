@@ -1,31 +1,21 @@
 .movie-details-container {
+
   display: flex;
   flex-direction: column;  
-  align-items: center;
+  align-items: center;  
   
-  .movie-details-title-container {
-    width: 100%;
-    margin-left: 10%;
-    align-items: flex-start;
-    
-
-    .movie-details-title {    
-      color: #FFFFFF;
-      margin: 20px 0 20px 0;
-    }
-  }  
-
   .search-card {
-    width: 90%;
+    width: 95%;
     height: 170px;
-
+    max-width: 1120px;
     display: flex;
     align-items: center;
     justify-content: center;   
     flex-direction: column;
     background-color: #6C6C6C;
-    border-radius: 10px;
-
+    border-radius: 4px;  
+    margin-left: 20px;
+    margin-right: 20px;
     .search-form-container {
       width: 90%;
     }
@@ -43,14 +33,14 @@
   }
 
   .movie-reviews-container {
-    width: 90%;    
-
+    width: 95%;    
+    max-width: 1120px;
     display: flex;
     align-items: center;    
     flex-direction: column;
     
     background-color: #6C6C6C;
-    border-radius: 10px;  
+    border-radius: 4px;  
     margin: 30px 0 50px 0;    
     padding: 0 0 30px 0;
 
