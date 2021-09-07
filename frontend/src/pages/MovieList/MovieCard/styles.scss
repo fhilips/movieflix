@@ -1,0 +1,43 @@
+.movie-card-container {
+  min-height: 322px;  
+  border-radius: 4px;
+  margin: 20px 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  .movie-img-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 25px 0 10px 0;  
+
+    .movie-img {    
+      width: 100%;    
+    }
+  }
+  
+    .movie-card-title {
+      margin: 12px 0 2px 14px;
+      font-weight: bold;
+      font-size: 20px;    
+      letter-spacing: -0.015em;
+      color: #FFFFFF;
+    }
+  
+    .movie-card-year {
+      margin-left: 14px;
+      font-weight: bold;
+      font-size: 16px;   
+      letter-spacing: -0.015em;
+      color: #FFC700;
+    }
+  
+    .movie-card-subtitle {
+      margin: 0 0 40px 14px;
+      font-size: 14px;
+      letter-spacing: -0.015em;
+      color: #FFFFFF;
+    }
+    
+}

@@ -1,7 +1,7 @@
 
 import './styles.scss';
 import { ReactComponent as Star } from 'assets/images/star.svg';
-import { Review } from 'Types/Reviews';
+import { Review } from 'types/Reviews';
 
 type Props = {
   movieReview: Review;

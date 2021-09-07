@@ -60,7 +60,7 @@ const LoginPage = () => {
         <MainImage />
       </section>
 
-      <div className="login-card-container">
+      <div className="login-card-container base-card">
         <form
           className="login-input-container"
           onSubmit={handleSubmit(onSubmit)}

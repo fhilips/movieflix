@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { requestBackend, requestBackendReviews } from 'utils/request';
 import { hasAnyRoles } from 'utils/auth';
 import ReviewCard from './ReviewCard';
-import { Review } from 'Types/Reviews';
+import { Review } from 'types/Reviews';
 import { useForm } from 'react-hook-form';
 
 type UrlParams = {
