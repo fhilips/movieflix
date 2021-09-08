@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Select from 'react-select';
 import { Genre } from 'types/Genre';
 import { requestBackend } from 'utils/request';
+
 import './styles.scss';
 
 type Props = {

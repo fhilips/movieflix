@@ -11,12 +11,13 @@ import { useForm } from 'react-hook-form';
 import DetailsCard from './CardDetails';
 import { Movie } from 'types/Movies';
 import { AxiosRequestConfig } from 'axios';
+import { toast } from 'react-toastify';
 
 type UrlParams = {
   movieId: string;  
 };
 
-type FormData = {
+type FormReviewData = {
   text: string,    
   movieId: string;
 }
@@ -30,7 +31,7 @@ const MovieDetails = () => {
 
   const [movie, setMovie] = useState<Movie>();
 
-  const { register, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit, setValue } = useForm<FormReviewData>();
 
   const getMovie = useCallback(() => {
     const params: AxiosRequestConfig = {
@@ -63,16 +64,24 @@ const MovieDetails = () => {
     getMovie();
   }, [getMovie, getMovieReviews]);
 
-  const onSubmit = (formData: FormData) => {
+  const onSubmit = (formData: FormReviewData) => {
     formData.movieId = movieId;
     console.log(formData)
     requestBackendReviews(formData)
       .then(() => {        
         console.log("sucesso");
+        setValue('text', '');
+        toast.success('Comentário salvo com sucesso!', {
+          position: "top-center"          
+          });
         getMovieReviews();        
       })
       .catch(error => {       
         console.log("Error! ", error);
+        toast.error('Não é permitido texto vazio na avaliação!', {
+          position: "top-center"      
+          });
+
       })            
   };
 
