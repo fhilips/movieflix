@@ -5,7 +5,7 @@ import './styles.scss';
 type Props = {
   movie: Movie;
 }
-const MovieCard = ({movie} : Props) => {
+const Card = ({movie} : Props) => {
 
   return (
     <main className="movie-card-container base-card">
@@ -19,4 +19,4 @@ const MovieCard = ({movie} : Props) => {
   );
 };
 
-export default MovieCard;
+export default Card;
