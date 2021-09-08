@@ -2,7 +2,7 @@ import MainButton from 'components/MainButton';
 import './styles.scss';
 
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { requestBackend, requestBackendReviews } from 'utils/request';
 import { hasAnyRoles } from 'utils/auth';
 import ReviewCard from './ReviewCard';
@@ -30,11 +30,20 @@ const MovieDetails = () => {
 
   const [movie, setMovie] = useState<Movie>();
 
-  const [newReview, setNewReview] = useState(false);
-
   const { register, handleSubmit } = useForm<FormData>();
 
-  useEffect(() => {
+  const getMovie = useCallback(() => {
+    const params: AxiosRequestConfig = {
+      url: `/movies/${movieId}`,
+      withCredentials: true,     
+    };
+    requestBackend(params).then((response) => {
+      setMovie(response.data);
+      console.log(response.data);
+    });
+  }, [movieId])
+
+  const getMovieReviews = useCallback(() => {
     const reviewsParams = {
       url: `/movies/${movieId}/reviews`,
       withCredentials: true,
@@ -47,18 +56,12 @@ const MovieDetails = () => {
       console.log(response.data);
       setMovieReviews(response.data);
     });
-  }, [movieId, newReview]);
+  }, [movieId])
 
   useEffect(() => {
-    const params: AxiosRequestConfig = {
-      url: `/movies/${movieId}`,
-      withCredentials: true,     
-    };
-    requestBackend(params).then((response) => {
-      setMovie(response.data);
-      console.log(response.data);
-    });
-  }, [movieId]);
+    getMovieReviews();
+    getMovie();
+  }, [getMovie, getMovieReviews]);
 
   const onSubmit = (formData: FormData) => {
     formData.movieId = movieId;
@@ -66,12 +69,11 @@ const MovieDetails = () => {
     requestBackendReviews(formData)
       .then(() => {        
         console.log("sucesso");
-        setNewReview(true);
+        getMovieReviews();        
       })
       .catch(error => {       
         console.log("Error! ", error);
-      })        
-      setNewReview(false);
+      })            
   };
 
   return (
@@ -81,7 +83,7 @@ const MovieDetails = () => {
       </div>
 
       {hasAnyRoles(['ROLE_MEMBER']) && (
-        <div className="search-card">
+        <div className="search-card base-card">
           <div className="search-form-container">
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
@@ -97,7 +99,7 @@ const MovieDetails = () => {
         </div>
       )}
 
-      <div className="movie-reviews-container">
+      <div className="movie-reviews-container base-card">
         {movieReviews?.length !== 0 ? (
           movieReviews?.map((movieReview) => {
             return (

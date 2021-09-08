@@ -1,7 +1,7 @@
 import { ReactComponent as MainImage } from 'assets/images/main-image.svg';
 import { AuthContext } from 'AuthContext';
 import MainButton from 'components/MainButton';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getTokenData } from 'utils/auth';
@@ -25,8 +25,6 @@ const LoginPage = () => {
 
   const { setAuthContextData } = useContext(AuthContext);
 
-  const [hasError, setHasError] = useState(false);
-
   const { register, handleSubmit, formState: {errors} } = useForm<CredentialsDTO>();
 
   const history = useHistory();
@@ -34,8 +32,7 @@ const LoginPage = () => {
   const onSubmit = (formData: CredentialsDTO) => {
     requestBackendLogin(formData)
       .then((response) => {
-        saveAuthData(response.data);
-        setHasError(false);
+        saveAuthData(response.data);        
         console.log('Sucesso! ', response);
         setAuthContextData({
           authenticated: true,
@@ -44,8 +41,7 @@ const LoginPage = () => {
         history.replace(from);
       })
       .catch((error) => {
-        setHasError(true);
-        console.log('Error! ', error);
+         console.log('Error! ', error);
       });
   };
 
