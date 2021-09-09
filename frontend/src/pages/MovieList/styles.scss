@@ -1,8 +1,12 @@
 .filter-container { 
+  
   padding: 5px 20px;
   border-radius: 4px;
   margin-bottom: 20px;
 }
+.movie-list-container {
+  margin: 20px ;
+}  
 
 @media (min-width: 576px) {
   .movie-list-container {

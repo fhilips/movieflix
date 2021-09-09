@@ -1,9 +1,14 @@
 .movie-details-container {
-
   display: flex;
   flex-direction: column;  
   align-items: center;  
-  
+
+  .card-details {
+    width: 95%;
+    margin: 20px 10px;
+    max-width: 1120px;
+  }
+
   .search-card {
     width: 95%;
     height: 170px;
@@ -16,6 +21,7 @@
     border-radius: 4px;  
     margin-left: 20px;
     margin-right: 20px;
+    
     .search-form-container {
       width: 90%;
     }

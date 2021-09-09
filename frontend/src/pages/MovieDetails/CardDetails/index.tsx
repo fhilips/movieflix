@@ -5,7 +5,7 @@ type Props = {
   movie: Movie;
 };
 
-const DetailsCard = ({ movie }: Props) => {
+const CardDetail = ({ movie }: Props) => {
   return (
     <main className="details-card-container base-card">
       <div className="details-img-container ">
@@ -22,4 +22,4 @@ const DetailsCard = ({ movie }: Props) => {
   );
 };
 
-export default DetailsCard;
+export default CardDetail;

@@ -8,10 +8,11 @@ import { hasAnyRoles } from 'utils/auth';
 import ReviewCard from './ReviewCard';
 import { Review } from 'types/Reviews';
 import { useForm } from 'react-hook-form';
-import DetailsCard from './CardDetails';
+import CardDetails from './CardDetails';
 import { Movie } from 'types/Movies';
 import { AxiosRequestConfig } from 'axios';
 import { toast } from 'react-toastify';
+
 
 type UrlParams = {
   movieId: string;  
@@ -87,9 +88,11 @@ const MovieDetails = () => {
 
   return (
     <main className="movie-details-container">
-      <div className="movie-details-card">
-        {movie && <DetailsCard movie={movie}/>}
+      <div className="card-details">
+        {movie && <CardDetails movie={movie}/>}
       </div>
+    
+      
 
       {hasAnyRoles(['ROLE_MEMBER']) && (
         <div className="search-card base-card">

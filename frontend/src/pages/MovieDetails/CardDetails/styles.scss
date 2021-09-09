@@ -1,8 +1,9 @@
 .details-card-container {
+  
   min-height: 322px;  
   border-radius: 4px;
-  margin: 20px 10px;
-  max-width: 1120px;
+  margin: 0px 0px;
+  
   display: flex;
   flex-direction: column;
 
@@ -61,8 +62,7 @@
 }
 
 @media (min-width: 768px) {
-  .details-card-container {
-    margin: 40px;
+  .details-card-container {   
     padding: 0 20px 20px 20px;
   }
   .details-img {    
